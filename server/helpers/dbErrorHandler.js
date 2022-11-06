@@ -17,6 +17,7 @@ const getErrorMessage = err => {
 			}
 		}
 	}
+	return message;
 };
 
 const getUniqueErrorMessage = err => {
