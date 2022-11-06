@@ -29,7 +29,7 @@ const config = {
 		new webpack.NoEmitOnErrorsPlugin(),
 	],
 	resolve: {
-		allias: {
+		alias: {
 			'react-dom': '@hot-loader/react-dom',
 		},
 	},
