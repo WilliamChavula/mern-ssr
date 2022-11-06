@@ -9,7 +9,7 @@ export default () => {
         <title>MERN Skeleton</title>
       </head>
       <body>
-        <div id="root></div>
+        <div id="root"></div>
     
         <script src="/dist/bundle.js" type="text/javascript"></script>
       </body>

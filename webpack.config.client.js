@@ -5,13 +5,13 @@ const CWD = process.cwd();
 const config = {
 	name: 'browser',
 	mode: 'development',
-	devTool: 'eval-source-map',
+	devtool: 'eval-source-map',
 	entry: [
 		'webpack-hot-middleware/client?reload=true',
 		path.join(CWD, 'client/main.js'),
 	],
 	output: {
-		path: path.join(CWD, '/dist'),
+		path: path.join(CWD, 'dist/'),
 		filename: 'bundle.js',
 		publicPath: '/dist/',
 	},
