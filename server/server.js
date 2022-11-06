@@ -1,24 +1,13 @@
-import path from 'path';
-
-import { MongoClient } from 'mongodb';
+import mongoose from 'mongoose';
 
 import app from './express';
 import compile from './devBundle';
 import config from '../config';
-import template from '../template';
 
-const url =
-	process.env.MONGODB_URI || 'mongodb://localhost:27017/mernSimpleSetup';
-
-(async () => {
-	const client = new MongoClient(url);
-	await client.connect();
-})();
-
-// MongoClient.connect(url, (err, db) => {
-// 	console.log('connected to Mongo Server');
-// 	db.close();
-// });
+mongoose.connect(config.mongoUri);
+mongoose.connection.on('error', () => {
+	throw new Error(`unable to connect to database: ${config.mongoUri}`);
+});
 
 app.listen(config.port, err => {
 	if (err) {

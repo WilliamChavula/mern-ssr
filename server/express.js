@@ -6,6 +6,8 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 
+import template from '../template';
+
 const CWD = process.cwd();
 const app = express();
 
