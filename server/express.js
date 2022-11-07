@@ -11,6 +11,7 @@ import template from '../template';
 
 /* -------EXPRESS ROUTES-------*/
 import userRoutes from './routes/user.routes';
+import authRoutes from './routes/auth.routes';
 
 const CWD = process.cwd();
 const app = express();
@@ -27,6 +28,7 @@ app.use('/dist', express.static(path.join(CWD, 'dist')));
 
 /* -------EXPRESS ROUTES MIDDLEWARE-------*/
 app.use('/', userRoutes);
+app.use('/', authRoutes);
 
 app.get('/', (req, res) => {
 	res.status(200).send(template());
