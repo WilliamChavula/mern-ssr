@@ -1,12 +1,10 @@
-import { extend } from 'lodash';
-
-import User from '../models/user.model';
 import getErrorMessage from '../helpers/dbErrorHandler';
+import userServices from '../services/user.services';
 
 const create = async (req, res) => {
-	const user = new User(req.body);
 	try {
-		await user.save();
+		await userServices.createUserDocument(req.body);
+
 		res.status(200).json({ message: 'Successfully signed up!' });
 	} catch (error) {
 		return res.status(400).json({ error: getErrorMessage(error) });
@@ -15,7 +13,7 @@ const create = async (req, res) => {
 
 const list = async (req, res) => {
 	try {
-		const users = await User.find().select('name email updatedAt createdAt');
+		const users = await userServices.listUserDocuments();
 		res.json(users);
 	} catch (error) {
 		return res.status(400).json({ error: getErrorMessage(error) });
@@ -24,7 +22,7 @@ const list = async (req, res) => {
 
 const userByID = async (req, res, next, id) => {
 	try {
-		const user = await User.findById(id);
+		const user = await userServices.getUserDocument(id);
 
 		if (!user) {
 			return res.status(400).json({ error: 'User not found' });
@@ -36,6 +34,7 @@ const userByID = async (req, res, next, id) => {
 		return res.status('400').json({ error: 'Could not retrieve user' });
 	}
 };
+
 const read = (req, res) => {
 	req.profile.password = undefined;
 	req.profile.salt = undefined;
@@ -46,24 +45,19 @@ const read = (req, res) => {
 const update = async (req, res) => {
 	try {
 		let user = req.profile;
-
-		user = extend(user, req.body);
-		await user.save();
-		user.password = undefined;
-		user.salt = undefined;
+		user = await userServices.updateUserDocument(user, req.body);
 
 		res.json(user);
 	} catch (error) {
 		return res.status(400).json({ error: getErrorMessage(error) });
 	}
 };
+
 const remove = async (req, res) => {
 	try {
 		const user = req.profile;
 
-		const deletedUser = await User.findByIdAndDelete(user._id);
-		deletedUser.password = undefined;
-		deletedUser.salt = undefined;
+		const deletedUser = await userServices.deleteUserDocument(user._id);
 
 		res.json(deletedUser);
 	} catch (error) {
