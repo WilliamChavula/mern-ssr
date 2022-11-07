@@ -38,4 +38,4 @@ const getUniqueErrorMessage = err => {
 	return output;
 };
 
-export default { getErrorMessage };
+export default getErrorMessage;
