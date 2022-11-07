@@ -9,12 +9,20 @@ const createUserDocument = async user => {
 };
 
 const listUserDocuments = async () => {
-	const users = await User.find().select('name email updatedAt createdAt');
+	const users = await User.find()
+		.select('name email updatedAt createdAt')
+		.exec();
 	return users;
 };
 
 const getUserDocument = async userId => {
-	const user = await User.findById(userId);
+	const user = await User.findById(userId).exec();
+	return user;
+};
+
+const getUserDocumentByEmail = async email => {
+	const user = await User.findOne({ email }).exec();
+
 	return user;
 };
 
@@ -29,7 +37,7 @@ const updateUserDocument = async (user, patchObject) => {
 };
 
 const deleteUserDocument = async id => {
-	const deletedUser = await User.findByIdAndDelete(id);
+	const deletedUser = await User.findByIdAndDelete(id).exec();
 
 	deletedUser.password = undefined;
 	deletedUser.salt = undefined;
@@ -41,6 +49,7 @@ export default {
 	createUserDocument,
 	listUserDocuments,
 	getUserDocument,
+	getUserDocumentByEmail,
 	updateUserDocument,
 	deleteUserDocument,
 };
