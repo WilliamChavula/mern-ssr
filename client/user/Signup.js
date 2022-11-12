@@ -35,9 +35,9 @@ const TextFieldComponent = styled(TextField)(({ theme }) => ({
 	width: 300,
 }));
 
-const IconComponent = styled(Icon)(({ theme }) => ({
+const IconComponent = styled(Icon)({
 	verticalAlign: 'middle',
-}));
+});
 
 const Signup = () => {
 	const [values, setValues] = React.useState({
@@ -53,6 +53,8 @@ const Signup = () => {
 	};
 
 	const handleSubmit = async event => {
+		event.preventDefault();
+
 		try {
 			const user = {
 				name: values.name || undefined,
