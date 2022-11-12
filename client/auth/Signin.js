@@ -62,7 +62,7 @@ const Signin = props => {
 
 			const data = await signin(user);
 
-			authenticate(data?.token, () => {
+			authenticate(data, () => {
 				setValues({ ...values, error: '', redirectToReferrer: true });
 			});
 		} catch (error) {
