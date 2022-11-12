@@ -12,6 +12,8 @@ const signin = async user => {
 			},
 			withCredentials: true,
 		});
+
+		return response.data;
 	} catch (error) {
 		Logger.error(error);
 	}
