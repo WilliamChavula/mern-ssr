@@ -30,9 +30,9 @@ const list = async signal => {
 	}
 };
 
-const read = async (params, credentials, signal) => {
+const read = async (id, credentials, signal) => {
 	try {
-		let response = await axios.get(`/api/users/${params.id}`, {
+		let response = await axios.get(`/api/users/${id}`, {
 			signal: signal,
 			headers: {
 				'Content-Type': 'application/json',
@@ -59,6 +59,7 @@ const update = async (params, credentials, user) => {
 				},
 			}
 		);
+		return response.data;
 	} catch (error) {
 		Logger.error(error);
 	}
