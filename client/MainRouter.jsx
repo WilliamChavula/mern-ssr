@@ -8,10 +8,12 @@ import Users from './user/Users';
 import Profile from './user/Profile';
 import EditProfile from './user/EditProfile';
 import PrivateRoute from './auth/PrivateRoute';
+import Menu from './core/Menu';
 
 const MainRouter = () => {
 	return (
 		<Routes>
+			<Menu />
 			<Route
 				path='/'
 				element={<Home />}
