@@ -14,9 +14,10 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
+
+import DeleteUser from './DeleteUser';
 
 const PaperComponent = styled(Paper)(({ theme }) => ({
 	maxWidth: 600,
@@ -81,7 +82,7 @@ const Profile = () => {
 									<EditIcon />
 								</IconButton>
 							</Link>
-							<DeleteIcon userId={user._id} />
+							<DeleteUser userId={user._id} />
 						</ListItemSecondaryAction>
 					)}
 				</ListItem>
