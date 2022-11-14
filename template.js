@@ -7,11 +7,11 @@ export default (markup, styles) => {
         <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
-       
+        ${styles}
         <title>MERN Skeleton</title>
       </head>
       <body>
-        <div id="root"></div>
+        <div id="root">${markup}</div>
     
         <script type="text/javascript" src="/dist/bundle.js"></script>
       </body>
