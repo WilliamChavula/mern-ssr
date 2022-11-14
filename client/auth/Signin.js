@@ -53,24 +53,27 @@ const Signin = props => {
 		setValues({ ...values, [name]: value });
 	};
 
-	const handleSubmit = async event => {
+	const handleSubmit = () => {
 		try {
 			const user = {
 				email: values.email || undefined,
 				password: values.password || undefined,
 			};
 
-			const data = await signin(user);
+			signin(user).then(data => {
+				console.log('called');
 
-			authenticate(data, () => {
-				setValues({ ...values, error: '', redirectToReferrer: true });
+				authenticate(data, () => {
+					setValues({ ...values, error: '', redirectToReferrer: true });
+				});
 			});
 		} catch (error) {
+			console.log({ error });
 			setValues({ ...values, error: data.error });
 		}
 	};
 
-	const { from } = props.location.state || {
+	const { from } = props.location?.state || {
 		from: {
 			pathname: '/',
 		},
@@ -114,7 +117,7 @@ const Signin = props => {
 					sx={{ m: 'auto', mb: 2 }}
 					color='primary'
 					variant='contained'
-					onSubmit={handleSubmit}>
+					onClick={handleSubmit}>
 					Submit
 				</Button>
 			</CardActions>

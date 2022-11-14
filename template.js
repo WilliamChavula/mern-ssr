@@ -1,6 +1,5 @@
-export default () => {
-	return `<!doctype html>
-    <html lang="en">
+export default (markup, styles) => {
+	return `<html lang="en">
       <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -8,12 +7,13 @@ export default () => {
         <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
+       
         <title>MERN Skeleton</title>
       </head>
       <body>
         <div id="root"></div>
     
-        <script src="/dist/bundle.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/dist/bundle.js"></script>
       </body>
     </html>
     `;

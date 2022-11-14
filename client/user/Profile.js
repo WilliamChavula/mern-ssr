@@ -1,4 +1,5 @@
 import React from 'react';
+import { styled } from '@mui/material';
 import { useParams, redirect, Link } from 'react-router-dom';
 import { isAuthenticated } from '../auth/auth-helper';
 import { read } from './api-user';
@@ -34,7 +35,7 @@ const TypographyComponent = styled(Typography)(({ theme }) => ({
 const Profile = () => {
 	const { userId } = useParams();
 	const [user, setUser] = React.useState({});
-	const [redirectToSignin, setRedirectToSignin] = useState(false);
+	const [redirectToSignin, setRedirectToSignin] = React.useState(false);
 
 	React.useEffect(() => {
 		const abortController = new AbortController();
@@ -44,6 +45,7 @@ const Profile = () => {
 			try {
 				const jwt = isAuthenticated();
 
+				console.log(jwt);
 				const user = await read(userId, { t: jwt }, signal);
 				setUser(user);
 			} catch (error) {

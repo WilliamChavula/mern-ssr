@@ -7,7 +7,7 @@ import { signout } from './api-auth';
  */
 const authenticate = (jwt, callback) => {
 	if (typeof window !== undefined) {
-		sessionStorage.setItem('jwt', JSON.stringify(jwt));
+		window.sessionStorage.setItem('jwt', JSON.stringify(jwt));
 
 		callback();
 	}
@@ -22,7 +22,7 @@ const isAuthenticated = () => {
 		return false;
 	}
 
-	if (sessionStorage.getItem('jwt')) {
+	if (window.sessionStorage.getItem('jwt')) {
 		return JSON.parse(sessionStorage.getItem('jwt'));
 	} else return false;
 };
@@ -34,7 +34,7 @@ const isAuthenticated = () => {
  */
 const clearJWT = async callback => {
 	if (typeof window !== undefined) {
-		sessionStorage.removeItem('jwt');
+		window.sessionStorage.removeItem('jwt');
 
 		callback();
 

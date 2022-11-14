@@ -8,8 +8,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
 import HomeIcon from '@mui/icons-material/Home';
-
-import { isAuthenticated, clearJWT } from '../auth/auth-helper';
+import { isAuthenticated } from '../auth/auth-helper';
 
 const isActive = (location, path) => {
 	if (location.pathname === path) return { color: '#ff4081' };
@@ -20,7 +19,7 @@ const Menu = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	const { user } = isAuthenticated();
+	// const user = isAuthenticated();
 
 	return (
 		<AppBar position='static'>
@@ -40,32 +39,26 @@ const Menu = () => {
 				<Link to='/users'>
 					<Button style={isActive(location, '/users')}>Users</Button>
 				</Link>
-				{!user && (
-					<span>
-						<Link to='/signup'>
-							<Button style={isActive(location, '/signup')}>Sign up</Button>
-						</Link>
-						<Link to='/signin'>
-							<Button style={isActive(location, '/signin')}>Sign In</Button>
-						</Link>
-					</span>
-				)}
-				{user && (
-					<span>
-						<Link to={'/user/' + user._id}>
-							<Button style={isActive(location, '/user/' + user._id)}>
-								My Profile
-							</Button>
-						</Link>
-						<Button
-							color='inherit'
-							onClick={() => {
-								clearJWT(() => navigate('/'));
-							}}>
-							Sign out
-						</Button>
-					</span>
-				)}
+				<span>
+					<Link to='/signup'>
+						<Button style={isActive(location, '/signup')}>Sign up</Button>
+					</Link>
+					<Link to='/signin'>
+						<Button style={isActive(location, '/signin')}>Sign In</Button>
+					</Link>
+				</span>
+				<span>
+					<Link to={'/user/'}>
+						<Button>My Profile</Button>
+					</Link>
+					<Button
+						color='inherit'
+						onClick={() => {
+							clearJWT(() => navigate('/'));
+						}}>
+						Sign out
+					</Button>
+				</span>
 			</Toolbar>
 		</AppBar>
 	);

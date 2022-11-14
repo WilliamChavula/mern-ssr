@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, redirect, useLocation } from 'react-router-dom';
 
 import { isAuthenticated } from './auth-helper';
 
@@ -21,10 +21,10 @@ const PrivateRoute = () => {
 	return <Outlet />;
 };
 
-// const PrivateRoute = ({ children }) => {
-// 	const hasAuthenticated = isAuthenticated();
+export const PrivateRouteContainer = ({ children }) => {
+	const hasAuthenticated = isAuthenticated();
 
-// 	return hasAuthenticated ? children : redirect(to='/signin')
-// }
+	return hasAuthenticated ? children : redirect(to='/signin')
+}
 
 export default PrivateRoute;

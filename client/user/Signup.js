@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { styled } from '@mui/material';
 
 import Button from '@mui/material/Button';
@@ -113,7 +114,7 @@ const Signup = () => {
 						sx={{ m: 'auto', mb: 2 }}
 						color='primary'
 						variant='contained'
-						onSubmit={handleSubmit}>
+						onClick={handleSubmit}>
 						Submit
 					</Button>
 				</CardActions>

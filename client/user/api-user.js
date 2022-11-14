@@ -26,6 +26,7 @@ const list = async signal => {
 
 		return response.data;
 	} catch (error) {
+		console.log(error);
 		Logger.error(error);
 	}
 };
@@ -36,7 +37,7 @@ const read = async (id, credentials, signal) => {
 			signal: signal,
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${credentials.t}`,
+				Authorization: `Bearer ${credentials.token}`,
 			},
 		});
 

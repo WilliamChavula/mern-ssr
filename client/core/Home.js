@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 import bikeImage from '../assets/images/bike.jpg';
+import { Link } from 'react-router-dom';
 
 const CardContainer = styled(Card)(({ theme }) => ({
 	maxWidth: 600,
