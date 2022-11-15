@@ -24,7 +24,7 @@ const PrivateRoute = () => {
 export const PrivateRouteContainer = ({ children }) => {
 	const hasAuthenticated = isAuthenticated();
 
-	return hasAuthenticated ? children : redirect(to='/signin')
-}
+	return hasAuthenticated ? children : redirect('/signin');
+};
 
 export default PrivateRoute;

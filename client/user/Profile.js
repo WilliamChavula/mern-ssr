@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/material';
-import { useParams, redirect, Link } from 'react-router-dom';
+import { useParams, Navigate, Link } from 'react-router-dom';
 import { isAuthenticated } from '../auth/auth-helper';
 import { read } from './api-user';
 
@@ -45,21 +45,21 @@ const Profile = () => {
 			try {
 				const jwt = isAuthenticated();
 
-				console.log(jwt);
-				const user = await read(userId, { t: jwt }, signal);
-				setUser(user);
+				const user = await read(userId, { jwt }, signal);
+				
+				user ? setUser(user) : setRedirectToSignin(true);
 			} catch (error) {
 				setRedirectToSignin(true);
 			}
 		}
-		readDataAsync();
+		readDataAsync().catch(() => setRedirectToSignin(true));
 
 		return () => {
 			abortController.abort();
 		};
 	}, [userId]);
 
-	if (redirectToSignin) return redirect('/signin');
+	if (redirectToSignin) return <Navigate to='/signin' />;
 
 	return (
 		<PaperComponent elevation={4}>
@@ -91,7 +91,7 @@ const Profile = () => {
 				<Divider />
 				<ListItem>
 					<ListItemText
-						primary={'Joined: ' + new Date(user.created).toDateString()}
+						primary={'Joined: ' + new Date(user.createdAt).toDateString()}
 					/>
 				</ListItem>
 			</List>

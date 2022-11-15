@@ -19,12 +19,14 @@ import helmet from 'helmet';
 import userRoutes from './routes/user.routes';
 import authRoutes from './routes/auth.routes';
 
+import compile from './devBundle';
 import template from '../template';
 import MainRouter from '../client/MainRouter';
 import theme from '../client/theme';
 
 const CWD = process.cwd();
 const app = express();
+compile(app);
 
 /* -------CONFIGURE EXPRESS-------*/
 app.use(compression());

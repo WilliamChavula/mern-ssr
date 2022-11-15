@@ -37,7 +37,7 @@ const read = async (id, credentials, signal) => {
 			signal: signal,
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${credentials.token}`,
+				Authorization: `Bearer ${credentials.jwt.token}`,
 			},
 		});
 
@@ -48,6 +48,7 @@ const read = async (id, credentials, signal) => {
 };
 
 const update = async (params, credentials, user) => {
+	console.log(credentials.jwt.token);
 	try {
 		let response = await axios.put(
 			`/api/users/${params.id}/`,
@@ -56,7 +57,7 @@ const update = async (params, credentials, user) => {
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${credentials.t}`,
+					Authorization: `Bearer ${credentials.jwt.token}`,
 				},
 			}
 		);
@@ -72,7 +73,7 @@ const remove = async (params, credentials) => {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${credentials.t}`,
+				Authorization: `Bearer ${credentials.jwt.token}`,
 			},
 		});
 

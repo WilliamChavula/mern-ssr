@@ -81,6 +81,7 @@ const Signup = () => {
 						value={values.name}
 						onChange={handleChange}
 						margin='normal'
+						label='Name'
 					/>
 					<br />
 					<TextFieldComponent
@@ -89,6 +90,7 @@ const Signup = () => {
 						value={values.email}
 						onChange={handleChange}
 						margin='normal'
+						label='Email'
 					/>
 					<br />
 					<TextFieldComponent
@@ -98,6 +100,7 @@ const Signup = () => {
 						onChange={handleChange}
 						type='password'
 						margin='normal'
+						label='Password'
 					/>
 					<br />
 					{values.error && (

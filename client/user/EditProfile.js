@@ -54,7 +54,7 @@ const EditProfile = () => {
 
 		async function readDataAsync() {
 			try {
-				const user = await read(userId, { t: jwt }, signal);
+				const user = await read(userId, { jwt }, signal);
 				setUser({ ...user, name: user.name, email: user.email });
 			} catch (error) {
 				setUser({ ...user, error });
@@ -81,7 +81,7 @@ const EditProfile = () => {
 				password: user.password || undefined,
 			};
 
-			const updatedUser = await update({ id: userId }, { t: jwt }, user);
+			const updatedUser = await update({ id: userId }, { jwt }, user);
 			setUser({
 				...user,
 				name: updatedUser.name,
@@ -95,7 +95,7 @@ const EditProfile = () => {
 		}
 	};
 
-	if (redirectToSignin) return redirect(`/user/${userId}`);
+	if (user.redirectToProfile) return redirect(`/user/${userId}`);
 
 	return (
 		<CardComponent>
@@ -107,6 +107,7 @@ const EditProfile = () => {
 					value={user.name}
 					onChange={handleChange}
 					margin='normal'
+					label='Name'
 				/>
 				<br />
 				<TextFieldComponent
@@ -115,6 +116,7 @@ const EditProfile = () => {
 					value={user.email}
 					onChange={handleChange}
 					margin='normal'
+					label='Email'
 				/>
 				<br />
 				<TextFieldComponent
@@ -124,6 +126,7 @@ const EditProfile = () => {
 					onChange={handleChange}
 					type='password'
 					margin='normal'
+					label='Password'
 				/>
 				<br />
 				{user.error && (

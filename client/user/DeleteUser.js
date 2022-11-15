@@ -26,7 +26,7 @@ const DeleteUser = ({ userId }) => {
 		try {
 			const jwt = isAuthenticated();
 
-			await remove({ id: userId }, { t: jwt });
+			await remove({ id: userId }, { jwt });
 			await clearJWT(() => Logger.info('Account deleted'));
 
 			setRedirect(true);

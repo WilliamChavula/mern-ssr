@@ -36,7 +36,7 @@ const MainRouter = () => {
 					element={<Profile />}
 				/>
 				<Route
-					path='/user/edit'
+					path='/user/edit/:userId'
 					element={
 						<PrivateRouteContainer>
 							<EditProfile />

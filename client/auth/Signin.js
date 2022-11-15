@@ -92,6 +92,7 @@ const Signin = props => {
 					value={values.email}
 					onChange={handleChange}
 					margin='normal'
+					label='Email'
 				/>
 				<br />
 				<TextFieldComponent
@@ -101,6 +102,7 @@ const Signin = props => {
 					onChange={handleChange}
 					type='password'
 					margin='normal'
+					label='Password'
 				/>
 				<br />
 				{values.error && (

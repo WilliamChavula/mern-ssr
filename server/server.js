@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 import app from './express';
-import compile from './devBundle';
 import config from '../config';
 
 mongoose.connect(config.mongoUri);
@@ -16,5 +15,3 @@ app.listen(config.port, err => {
 
 	console.info(`Server started on port ${config.port}`);
 });
-
-compile(app);
