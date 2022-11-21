@@ -1,4 +1,3 @@
-import getErrorMessage from '../helpers/dbErrorHandler';
 import authServices from '../services/auth.services';
 import userServices from '../services/user.services';
 
@@ -21,7 +20,7 @@ const signin = async (req, res) => {
 		/* -------user is found and passwords match-------*/
 		/* -------authenticate user and generate JWT token-------*/
 		const token = authServices.createToken(user._id);
-		res.cookie('t', token, { expire: new Date() + 9999 });
+		res.cookie('t', token, { expire: Date.now() + 9999 });
 
 		return res.json({
 			token,
@@ -32,7 +31,7 @@ const signin = async (req, res) => {
 			},
 		});
 	} catch (error) {
-		return res.status('401').json({ error: 'Could not sign in' });
+		return res.status(401).json({ error: 'Could not sign in' });
 	}
 };
 
@@ -44,10 +43,12 @@ const signout = (req, res) => {
 
 const hasAuthorization = (req, res, next) => {
 	const authorized =
-		req.profile && req.auth && req.profile._id === req.auth._id;
+		req.profile && req.auth && req.profile._id.toString() === req.auth._id;
+
+	console.log({profile: req.profile,  auth: req.auth, profileId: req.profile._id.toString(), authId: req.auth._id});
 
 	if (!authorized) {
-		return res.status('403').json({
+		return res.status(403).json({
 			error: 'User is not authorized',
 		});
 	}

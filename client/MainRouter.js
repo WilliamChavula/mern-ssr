@@ -35,13 +35,11 @@ const MainRouter = () => {
 					path='/user/:userId'
 					element={<Profile />}
 				/>
-				<Route
-					path='/user/edit/:userId'
-					element={
-						<PrivateRouteContainer>
-							<EditProfile />
-						</PrivateRouteContainer>
-					}></Route>
+				<Route element={<PrivateRoute />}>
+					<Route
+						path='/user/edit/:userId'
+						element={<EditProfile />} />
+				</Route>
 			</Routes>
 		</>
 	);

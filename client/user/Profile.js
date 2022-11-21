@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/material';
-import { useParams, Navigate, Link } from 'react-router-dom';
+import { useLocation, useParams, Navigate, Link } from 'react-router-dom';
 import { isAuthenticated } from '../auth/auth-helper';
 import { read } from './api-user';
 
@@ -33,6 +33,7 @@ const TypographyComponent = styled(Typography)(({ theme }) => ({
 }));
 
 const Profile = () => {
+	const location = useLocation();
 	const { userId } = useParams();
 	const [user, setUser] = React.useState({});
 	const [redirectToSignin, setRedirectToSignin] = React.useState(false);
@@ -59,7 +60,7 @@ const Profile = () => {
 		};
 	}, [userId]);
 
-	if (redirectToSignin) return <Navigate to='/signin' />;
+	if (redirectToSignin) return <Navigate to='/signin' state={{ from: location }} />;
 
 	return (
 		<PaperComponent elevation={4}>
@@ -75,7 +76,7 @@ const Profile = () => {
 						primary={user.name}
 						secondary={user.email}
 					/>{' '}
-					{isAuthenticated().user && isAuthenticated().user._id == user._id && (
+					{isAuthenticated().user && isAuthenticated().user._id === user._id && (
 						<ListItemSecondaryAction>
 							<Link to={`/user/edit/${user._id}`}>
 								<IconButton

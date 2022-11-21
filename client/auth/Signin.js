@@ -1,47 +1,18 @@
 import React from 'react';
-import { styled } from '@mui/material';
-import { Navigate } from 'react-router-dom';
+import { useLocation, Navigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Icon from '@mui/material/Icon';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 import { authenticate } from './auth-helper';
 import { signin } from './api-auth';
+import { CardComponent, IconComponent, TextFieldComponent, TypographyComponent } from '../user/styles';
 
-const CardComponent = styled(Card)(({ theme }) => ({
-	maxWidth: 600,
-	margin: 'auto',
-	textAlign: 'center',
-	marginTop: theme.spacing(5),
-	paddingBottom: theme.spacing(2),
-}));
 
-const TypographyComponent = styled(Typography)(({ theme }) => ({
-	marginTop: theme.spacing(2),
-	color: theme.palette.openTitle,
-}));
-
-const TextFieldComponent = styled(TextField)(({ theme }) => ({
-	marginLeft: theme.spacing(1),
-	marginRight: theme.spacing(1),
-	width: 300,
-}));
-
-const IconComponent = styled(Icon)({
-	verticalAlign: 'middle',
-});
-
-const ButtonComponent = styled(Button)(({ theme }) => ({
-	margin: 'auto',
-	marginBottom: theme.spacing(2),
-}));
-
-const Signin = props => {
+const Signin = () => {
+	const location = useLocation();
 	const [values, setValues] = React.useState({
 		email: '',
 		password: '',
@@ -61,19 +32,17 @@ const Signin = props => {
 			};
 
 			signin(user).then(data => {
-				console.log('called');
 
 				authenticate(data, () => {
 					setValues({ ...values, error: '', redirectToReferrer: true });
 				});
 			});
 		} catch (error) {
-			console.log({ error });
 			setValues({ ...values, error: data.error });
 		}
 	};
 
-	const { from } = props.location?.state || {
+	const { from } = location.state || {
 		from: {
 			pathname: '/',
 		},

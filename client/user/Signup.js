@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { styled } from '@mui/material';
 
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Dialog from '@mui/material/Dialog';
@@ -11,34 +9,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Icon from '@mui/material/Icon';
-import TextField from '@mui/material/TextField';
+
 import Typography from '@mui/material/Typography';
 
 import { create } from './api-user';
-
-const CardComponent = styled(Card)(({ theme }) => ({
-	maxWidth: 600,
-	margin: 'auto',
-	textAlign: 'center',
-	marginTop: theme.spacing(5),
-	paddingBottom: theme.spacing(2),
-}));
-
-const TypographyComponent = styled(Typography)(({ theme }) => ({
-	marginTop: theme.spacing(2),
-	color: theme.palette.openTitle,
-}));
-
-const TextFieldComponent = styled(TextField)(({ theme }) => ({
-	marginLeft: theme.spacing(1),
-	marginRight: theme.spacing(1),
-	width: 300,
-}));
-
-const IconComponent = styled(Icon)({
-	verticalAlign: 'middle',
-});
+import { CardComponent, IconComponent, TextFieldComponent, TypographyComponent } from './styles';
 
 const Signup = () => {
 	const [values, setValues] = React.useState({
@@ -63,7 +38,7 @@ const Signup = () => {
 				password: values.password || undefined,
 			};
 
-			const newUser = await create(user);
+			await create(user);
 			setValues({ ...values, error: '', open: true });
 		} catch (error) {
 			setValues({ ...values, error });

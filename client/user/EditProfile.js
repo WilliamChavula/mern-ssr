@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, redirect } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { styled } from '@mui/material';
 
 import Button from '@mui/material/Button';
@@ -95,7 +95,7 @@ const EditProfile = () => {
 		}
 	};
 
-	if (user.redirectToProfile) return redirect(`/user/${userId}`);
+	if (user.redirectToProfile) return <Navigate to={`/user/${userId}`} />;
 
 	return (
 		<CardComponent>

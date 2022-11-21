@@ -4,9 +4,7 @@ import jwt from 'jsonwebtoken';
 import config from '../../config';
 
 const createToken = userId => {
-	const token = jwt.sign({ _id: userId }, config.jwtSecret);
-
-	return token;
+	return jwt.sign({ _id: userId }, config.jwtSecret);
 };
 
 const requireSignin = expressjwt({

@@ -6,7 +6,7 @@ import { signout } from './api-auth';
  * @param {Function} callback - callback will allow the component to define actions that should take place after successfully signing in and storing credentials
  */
 const authenticate = (jwt, callback) => {
-	if (typeof window !== undefined) {
+	if (typeof window !== "undefined") {
 		window.sessionStorage.setItem('jwt', JSON.stringify(jwt));
 
 		callback();
@@ -18,7 +18,7 @@ const authenticate = (jwt, callback) => {
  * @returns {boolean} the stored credentials or false, depending on whether credentials were found in sessionStorage
  */
 const isAuthenticated = () => {
-	if (typeof window === undefined) {
+	if (typeof window === "undefined") {
 		return false;
 	}
 
@@ -33,7 +33,7 @@ const isAuthenticated = () => {
  * invokes signout method from api-auth.js to call the signout API.
  */
 const clearJWT = async callback => {
-	if (typeof window !== undefined) {
+	if (typeof window !== "undefined") {
 		window.sessionStorage.removeItem('jwt');
 
 		callback();

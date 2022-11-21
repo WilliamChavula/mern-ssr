@@ -1,6 +1,6 @@
 import React from 'react';
 import Logger from 'js-logger';
-import { redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -17,7 +17,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const DeleteUser = ({ userId }) => {
 	const [open, setOpen] = React.useState(false);
-	const [redirect, setRedirect] = React.useState(false);
+	const [redirectUser, setRedirectUser] = React.useState(false);
 
 	const handleDialogOpen = () => setOpen(true);
 	const handleDialogClose = () => setOpen(false);
@@ -29,13 +29,13 @@ const DeleteUser = ({ userId }) => {
 			await remove({ id: userId }, { jwt });
 			await clearJWT(() => Logger.info('Account deleted'));
 
-			setRedirect(true);
+			setRedirectUser(true);
 		} catch (error) {
 			Logger.error(error);
 		}
 	};
 
-	if (redirect) return redirect('/');
+	if (redirectUser) return <Navigate to ='/' />;
 
 	return (
 		<span>
